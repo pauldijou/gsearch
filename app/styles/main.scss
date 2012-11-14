@@ -1,0 +1,73 @@
+@import "compass_twitter_bootstrap";
+
+@import "compass_twitter_bootstrap_responsive";
+
+@import "select2";
+
+@import "angular-ui";
+
+@import "timeline";
+
+body {
+  margin-top: 60px;
+}
+
+form {
+  margin: 0px;
+}
+
+label {
+  display: block;
+  width: 100px;
+  text-align: right;
+  float: left;
+}
+
+label:AFTER {
+  content: ':'
+}
+
+label+div {
+  margin-left: 115px;
+  margin-bottom: 5px;
+  text-align: justify;
+}
+
+.navbar input {
+  margin-top: 6px;
+}
+
+tr.selectable {
+  cursor: pointer;
+}
+
+.timeline .month h3 {
+  border-top: 1px solid #888888;
+}
+
+.timeline .month:FIRST-CHILD h3 {
+  border-top-width: 0px;
+}
+
+.timeline .event {
+  margin-bottom: 10px;
+}
+
+.timeline .event .author {
+  color: #AAAAAA;
+}
+
+table.committers td {
+  padding-top: 35px;
+}
+
+table.committers td.avatar {
+  padding-top: 8px;
+  width: 96px;
+  text-align: center;
+}
+
+table.committers td.avatar img {
+  width: 80px;
+  height: 80px;
+}

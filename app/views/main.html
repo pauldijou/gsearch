@@ -1,0 +1,65 @@
+<div class="hero-unit" data-ng-hide="hasResult()">
+  <h1>Welcome on GSearch!</h1>
+  <p>Your adventure will begin as soon as you start typing a few characters in the search input at the top right corner of your screen.</p>
+  <h3>Enjoy searching!</h3>
+</div>
+
+<table data-ng-show="hasResult() && !isUserSearch" class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Owner</th>
+      <th>Repo name</th>
+      <th>Language</th>
+      <th>Fork?</th>
+      <th>Forks</th>
+      <th>Created</th>
+      <th>Last push</th>
+    </tr>
+  </thead>
+  <tfoot></tfoot>
+  <tbody>
+    <tr data-ng-repeat="repo in result" class="selectable" data-ng-click="showRepo(getRepoFullName(repo.owner, repo.name))">
+      <td>
+        <button-fav tooltip="{true: 'Remove from favorite', false: 'Add to favorite'}[isFavoriteRepo(getRepoFullName(repo.owner, repo.name))]" size="small" is-favorite="isFavoriteRepo(getRepoFullName(repo.owner, repo.name))" on-click="toggleFavoriteRepo(getRepoFullName(repo.owner, repo.name), $event)" />
+      </td>
+      <td>{{repo.owner}}</td>
+      <td>{{repo.name}}</td>
+      <td>{{repo.language}}</td>
+      <td style="text-align: center;"><boolean-icon value="repo.fork"/></td>
+      <td>{{repo.forks}}</td>
+      <td>{{repo.created | date:'dd/MM/yyyy'}}</td>
+      <td>{{repo.pushed | date:'dd/MM/yyyy - HH:mm:ss'}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<table data-ng-show="hasResult() && isUserSearch" class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Location</th>
+      <th>Main language</th>
+      <th>Repos</th>
+      <th>Followers</th>
+      <th>Joined</th>
+    </tr>
+  </thead>
+  <tfoot></tfoot>
+  <tbody>
+    <tr data-ng-repeat="user in result" class="selectable" data-ng-click="showUser(user.username)">
+      <td>
+        <button-fav size="small" is-favorite="isFavoriteUser(user.username)" on-click="toggleFavoriteUser(user.username, $event)" />
+      </td>
+      <td>{{user.username}}</td>
+      <td>{{user.name}}</td>
+      <td>{{user.location}}</td>
+      <td>{{user.language}}</td>
+      <td>{{user.repos}}</td>
+      <td>{{user.followers_count}}</td>
+      <td>{{user.created | date:'dd/MM/yyyy'}}</td>
+    </tr>
+  </tbody>
+</table>

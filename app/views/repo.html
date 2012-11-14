@@ -1,0 +1,148 @@
+<h1>
+  {{owner}} / {{name}} 
+  <button-fav size="large" label="{true: 'Favorite', false: 'Add to favorites'}[isFavoriteRepo(getRepoFullName(owner, name))]" is-favorite="isFavoriteRepo(getRepoFullName(owner, name))" on-click="toggleFavoriteRepo(getRepoFullName(owner, name), $event)"></button-fav>
+  <a href="{{repo.html_url}}" class="btn btn-primary btn-large">View on GitHub</a>
+</h1>
+
+<tabs>
+  <tab title="Stats">
+    <div id="commitsPieChart"></div>
+    <div id="commitsAreaStackChart"></div>
+    <div id="commitsColumnChart"></div>
+    
+  </tab>
+  
+  <tab title="Infos">
+    <div class="row-fluid">
+      <div class="span6">
+        <ul class="unstyled">
+          <li>
+            <label>Name</label>
+            <div>{{repo.name}}</div>
+          </li>
+          <li>
+            <label>Owner</label>
+            <div>
+              <a href="/#!/user/{{repo.owner.login}}">{{repo.owner.login}}</a>
+            </div>
+          </li>
+          <li>
+            <label>Description</label>
+            <div>{{repo.description}}</div>
+          </li>
+          <li>
+            <label>Created</label>
+            <div>{{repo.created_at | date:'dd/MM/yyyy'}}</div>
+          </li>
+          <li>
+            <label>Last push</label>
+            <div>{{repo.pushed_at | date:'dd/MM/yyyy - HH:mm:ss'}}</div>
+          </li>
+          <li>
+            <label>Last update</label>
+            <div>{{repo.updated_at | date:'dd/MM/yyyy - HH:mm:ss'}}</div>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="span6">
+        <ul class="unstyled">
+          <li>
+            <label>Public</label>
+            <div><boolean-icon value="!repo.private"/></div>
+          </li>
+          <li>
+            <label>Fork</label>
+            <div><boolean-icon value="repo.fork"/></div>
+          </li>
+          <li>
+            <label>Forks</label>
+            <div>{{repo.forks}}</div>
+          </li>
+          <li>
+            <label>Watchers</label>
+            <div>{{repo.watchers}}</div>
+          </li>
+          <li>
+            <label>Language</label>
+            <div>{{repo.language}}</div>
+          </li>
+          <li>
+            <label>Main branch</label>
+            <div>{{repo.master_branch}}</div>
+          </li>
+          <li>
+            <label>Wiki</label>
+            <div>
+              <span>
+                <boolean-icon value="repo.has_wiki"/>
+              </span>
+              <a href="{{repo.html_url}}/wiki" data-ng-show="repo.has_wiki">(see on GitHub)</a>
+            </div>
+          </li>
+          <li>
+            <label>Issues</label>
+            <div>
+              <span>
+                <boolean-icon value="repo.has_issues"/>
+              </span>
+              <a href="{{repo.html_url}}/issues" data-ng-show="repo.has_issues">(see on GitHub)</a>
+             </div>
+          </li>
+          <li>
+            <label>Downloads</label>
+            <div>
+              <span>
+                <boolean-icon value="repo.has_downloads"/>
+              </span>
+              <a href="{{repo.html_url}}/downloads" data-ng-show="repo.has_downloads">(see on GitHub)</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </tab>
+  
+  <tab title="Committers">
+    <table class="table table-striped table-bordered table-hover committers">
+      <thead>
+        <th></th>
+        <th>Login</th>
+        <th>Commits</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="author in committers" class="selectable" data-ng-click="showUser(author.login)">
+        <td class="avatar">
+          <img alt="avatar" data-ng-src="{{author.avatar_url}}">
+        </td>
+        <td>{{author.login}}</td>
+        <td>{{author.numberOfCommits}}</td>
+        <td>
+          <button-fav label="{true: 'Favorite', false: 'Add to favorites'}[isFavoriteUser(author.login)]" is-favorite="isFavoriteUser(author.login)" on-click="toggleFavoriteUser(author.login, $event)" />
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </tab>
+  
+  <tab title="Timeline">
+    <ul class="unstyled timeline">
+      <li data-ng-repeat="month in timeline" class="month">
+        <h3>{{month.title}}</h3>
+        <ul>
+          <li data-ng-repeat="week in month.weeks" class="week">
+            <h4>{{week.title}}</h4>
+            <ul>
+              <li data-ng-repeat="event in week.events" class="event">
+                {{event.message}} (<a href="{{event.url}}">{{event.sha}}</a>)
+                <br/>
+                <span class="author">{{event.authorName}} ({{event.authorEmail}}), {{event.date}}</span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </tab>
+</tabs>
