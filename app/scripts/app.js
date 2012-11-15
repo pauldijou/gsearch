@@ -11,7 +11,7 @@ var gsearchApp = angular.module('gsearchApp', ['ngResource', 'ui'])
         templateUrl: 'views/repo.html',
         controller: 'RepoCtrl'
       })
-      .when('/user/:username', {
+      .when('/user/:login', {
         templateUrl: 'views/user.html',
         controller: 'UserCtrl'
       })
@@ -73,7 +73,7 @@ function cleanMessages() {
 $.blockUI.defaults.baseZ = 10000;
 
 function block() {
-    $.blockUI({ message: '<h1><img src="images/wait.gif" /> Just a moment...</h1>' });
+    $.blockUI({ message: '<h1><img src="images/wait.gif" /> <span class="hidden-phone">Just a moment...</span></h1>' });
 }
 
 function unblock() {

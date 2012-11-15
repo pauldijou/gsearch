@@ -4,7 +4,7 @@
   <h3>Enjoy searching!</h3>
 </div>
 
-<table data-ng-show="hasResult() && !isUserSearch" class="table table-striped table-bordered table-hover">
+<table data-ng-show="hasResult() && !isUserSearch" class="table table-striped table-bordered table-hover main-repos">
   <thead>
     <tr>
       <th></th>
@@ -20,21 +20,21 @@
   <tfoot></tfoot>
   <tbody>
     <tr data-ng-repeat="repo in result" class="selectable" data-ng-click="showRepo(getRepoFullName(repo.owner, repo.name))">
-      <td>
+      <td class="small-fav-button">
         <button-fav tooltip="{true: 'Remove from favorite', false: 'Add to favorite'}[isFavoriteRepo(getRepoFullName(repo.owner, repo.name))]" size="small" is-favorite="isFavoriteRepo(getRepoFullName(repo.owner, repo.name))" on-click="toggleFavoriteRepo(getRepoFullName(repo.owner, repo.name), $event)" />
       </td>
       <td>{{repo.owner}}</td>
       <td>{{repo.name}}</td>
       <td>{{repo.language}}</td>
-      <td style="text-align: center;"><boolean-icon value="repo.fork"/></td>
+      <td class="icon"><boolean-icon value="repo.fork"/></td>
       <td>{{repo.forks}}</td>
-      <td>{{repo.created | date:'dd/MM/yyyy'}}</td>
-      <td>{{repo.pushed | date:'dd/MM/yyyy - HH:mm:ss'}}</td>
+      <td>{{repo.created_at | date:'dd/MM/yyyy'}}</td>
+      <td>{{repo.pushed_at | date:'dd/MM/yyyy - HH:mm:ss'}}</td>
     </tr>
   </tbody>
 </table>
 
-<table data-ng-show="hasResult() && isUserSearch" class="table table-striped table-bordered table-hover">
+<table data-ng-show="hasResult() && isUserSearch" class="table table-striped table-bordered table-hover main-users">
   <thead>
     <tr>
       <th></th>
@@ -50,7 +50,7 @@
   <tfoot></tfoot>
   <tbody>
     <tr data-ng-repeat="user in result" class="selectable" data-ng-click="showUser(user.username)">
-      <td>
+      <td class="small-fav-button">
         <button-fav size="small" is-favorite="isFavoriteUser(user.username)" on-click="toggleFavoriteUser(user.username, $event)" />
       </td>
       <td>{{user.username}}</td>
@@ -59,7 +59,7 @@
       <td>{{user.language}}</td>
       <td>{{user.repos}}</td>
       <td>{{user.followers_count}}</td>
-      <td>{{user.created | date:'dd/MM/yyyy'}}</td>
+      <td>{{user.created_at | date:'dd/MM/yyyy'}}</td>
     </tr>
   </tbody>
 </table>

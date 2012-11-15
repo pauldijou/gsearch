@@ -53,22 +53,36 @@ gsearchApp.controller('AppCtrl', function($scope, $location, searchRepos, search
         }
     }
     
+    $scope.cleanResult = function() {
+        $scope.result = [];
+    }
+    
+    $scope.hasResult = function() {
+        return $scope.result.length > 0;
+    }
+    
+    $scope.plural = function(num, char) {
+        char = char || 's';
+        
+        if(num > 1) {
+            return char;
+        } else {
+            return '';
+        }
+    }
+    
+    $scope.getRepoFullName = function(owner, repoName) {
+        return owner + '/' + repoName;
+    }
+    
     $scope.showRepo = function(repoFullName) {
         $location.path('repo/'+repoFullName);
     }
     
-    $scope.showUser = function(username) {
-        $location.path('user/'+username);
+    $scope.showUser = function(login) {
+        $location.path('user/'+login);
     }
-
-    $scope.hasResult = function() {
-        return $scope.result.length > 0;
-    }
-
-    $scope.getRepoFullName = function(owner, repoName) {
-        return owner + '/' + repoName;
-    }
-
+    
     $scope.getFavoriteRepos = function() {
         return angular.fromJson(localStorage.getItem('favoriteRepos')) || (new Array());
     }
@@ -105,8 +119,8 @@ gsearchApp.controller('AppCtrl', function($scope, $location, searchRepos, search
         return _.indexOf($scope.getFavoriteRepos(), repoFullName) > -1;
     }
 
-    $scope.isFavoriteUser = function(username) {
-        return _.indexOf($scope.getFavoriteUsers(), username) > -1;
+    $scope.isFavoriteUser = function(login) {
+        return _.indexOf($scope.getFavoriteUsers(), login) > -1;
     }
     
     $scope.toggleFavoriteRepo = function(repoFullName, $event) {
@@ -117,11 +131,11 @@ gsearchApp.controller('AppCtrl', function($scope, $location, searchRepos, search
         }
     }
     
-    $scope.toggleFavoriteUser = function(username, $event) {
-        if($scope.isFavoriteUser(username)) {
-            $scope.removeFavoriteUser(username, $event);
+    $scope.toggleFavoriteUser = function(login, $event) {
+        if($scope.isFavoriteUser(login)) {
+            $scope.removeFavoriteUser(login, $event);
         } else {
-            $scope.addFavoriteUser(username, $event);
+            $scope.addFavoriteUser(login, $event);
         }
     }
 
@@ -132,10 +146,10 @@ gsearchApp.controller('AppCtrl', function($scope, $location, searchRepos, search
         $scope.setFavoriteRepos(favoriteRepos);
     }
 
-    $scope.addFavoriteUser = function(username, $event) {
+    $scope.addFavoriteUser = function(login, $event) {
         $event.stopPropagation();
         var favoriteUsers = $scope.getFavoriteUsers();
-        favoriteUsers.push(username)
+        favoriteUsers.push(login)
         $scope.setFavoriteUsers(favoriteUsers);
     }
 
@@ -144,8 +158,8 @@ gsearchApp.controller('AppCtrl', function($scope, $location, searchRepos, search
         $scope.setFavoriteRepos(_.without($scope.getFavoriteRepos(), repoFullName));
     }
 
-    $scope.removeFavoriteUser = function(username, $event) {
+    $scope.removeFavoriteUser = function(login, $event) {
         $event.stopPropagation();
-        $scope.setFavoriteUsers(_.without($scope.getFavoriteUsers(), username));
+        $scope.setFavoriteUsers(_.without($scope.getFavoriteUsers(), login));
     }
 });

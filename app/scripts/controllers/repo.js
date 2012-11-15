@@ -102,9 +102,13 @@ gsearchApp.controller('RepoCtrl', function($scope, $routeParams, $filter, repo) 
         
         // Sort data
         _.each(timeline, function(month) {
+            month.totalCommits = 0;
+            
             _.each(month.weeks, function(week) {
                 week.events = _.sortBy(week.events, 'date');
                 week.events.reverse();
+                week.totalCommits = week.events.length;
+                month.totalCommits += week.events.length;
             });
             
             month.weeks = _.sortBy(month.weeks, 'key');

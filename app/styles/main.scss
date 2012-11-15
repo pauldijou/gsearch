@@ -8,8 +8,20 @@
 
 @import "timeline";
 
+@import "responsive_table";
+
 body {
-  margin-top: 60px;
+  padding-top: 60px;
+}
+
+@media (max-width: $navbarCollapseWidth) {
+  body {
+    padding-top: 0px;
+  }
+}
+
+footer {
+  padding-bottom: 20px;
 }
 
 form {
@@ -41,33 +53,25 @@ tr.selectable {
   cursor: pointer;
 }
 
-.timeline .month h3 {
-  border-top: 1px solid #888888;
+td.small-fav-button {
+  width: 34px;
 }
 
-.timeline .month:FIRST-CHILD h3 {
-  border-top-width: 0px;
+.table td.icon {
+  text-align: center;
 }
 
-.timeline .event {
-  margin-bottom: 10px;
-}
-
-.timeline .event .author {
-  color: #AAAAAA;
-}
-
-table.committers td {
+table.repo-users td {
   padding-top: 35px;
 }
 
-table.committers td.avatar {
+table.repo-users td.avatar {
   padding-top: 8px;
   width: 96px;
   text-align: center;
 }
 
-table.committers td.avatar img {
+img.avatar {
   width: 80px;
   height: 80px;
 }
