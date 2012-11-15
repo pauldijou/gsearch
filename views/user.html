@@ -1,0 +1,104 @@
+<h1>
+  <img alt="avatar" class="avatar" data-ng-src="{{user.avatar_url}}">
+  @{{login}}
+  <button-fav size="large" label="{true: 'Favorite', false: 'Add to favorites'}[isFavoriteUser(login)]" is-favorite="isFavoriteUser(login)" on-click="toggleFavoriteUser(login, $event)"></button-fav>
+  <a href="{{user.html_url}}" class="btn btn-primary btn-large">View on GitHub</a>
+</h1>
+
+<h2>Infos</h2>
+
+<div class="row-fluid">
+  <div class="span6">
+    <ul class="unstyled">
+      <li data-ng-show="user.name">
+        <label>Name</label>
+        <div>{{user.name}}</div>
+      </li>
+      <li data-ng-show="user.email">
+        <label>Email</label>
+        <div>{{user.email}}</div>
+      </li>
+      <li data-ng-show="user.location">
+        <label>Location</label>
+        <div>{{user.location}}</div>
+      </li>
+      <li data-ng-show="user.company">
+        <label>Company</label>
+        <div>{{user.company}}</div>
+      </li>
+      <li data-ng-show="user.bio">
+        <label>Bio</label>
+        <div>{{user.bio}}</div>
+      </li>
+      <li data-ng-show="user.created_at">
+        <label>Created</label>
+        <div>{{user.created_at | date:'dd/MM/yyyy'}}</div>
+      </li>
+      <li data-ng-show="user.{{user.blog}}">
+        <label>Blog</label>
+        <div>
+          <a href="{{user.blog}}">read it</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="span6">
+    <ul class="unstyled">
+      <li>
+        <label>Organisation</label>
+        <div><boolean-icon value="!isUser"/></div>
+      </li>
+      <li>
+        <label>Hireable</label>
+        <div><boolean-icon value="user.hireable"/></div>
+      </li>
+      <li>
+        <label>Following</label>
+        <div>{{user.following}}</div>
+      </li>
+      <li>
+        <label>Followers</label>
+        <div>{{user.followers}}</div>
+      </li>
+      <li>
+        <label>Public repos</label>
+        <div>{{user.public_repos}}</div>
+      </li>
+      <li>
+        <label>Public gists</label>
+        <div>{{user.public_gists}}</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<h2>Repos</h2>
+
+<table class="table table-striped table-bordered table-hover user-repos">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Repo name</th>
+      <th>Language</th>
+      <th>Fork?</th>
+      <th>Forks</th>
+      <th>Created</th>
+      <th>Last push</th>
+    </tr>
+  </thead>
+  <tfoot></tfoot>
+  <tbody>
+    <tr data-ng-repeat="repo in repos" class="selectable" data-ng-click="showRepo(repo.full_name)">
+      <td class="small-fav-button">
+        <button-fav tooltip="{true: 'Remove from favorite', false: 'Add to favorite'}[isFavoriteRepo(repo.full_name)]" size="small" is-favorite="isFavoriteRepo(repo.full_name)" on-click="toggleFavoriteRepo(repo.full_name, $event)" />
+      </td>
+      <td>{{repo.name}}</td>
+      <td>{{repo.language}}</td>
+      <td class="icon"><boolean-icon value="repo.fork"/></td>
+      <td>{{repo.forks}}</td>
+      <td>{{repo.created_at | date:'dd/MM/yyyy'}}</td>
+      <td>{{repo.pushed_at | date:'dd/MM/yyyy - HH:mm:ss'}}</td>
+    </tr>
+  </tbody>
+</table>

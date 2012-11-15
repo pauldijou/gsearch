@@ -1,0 +1,15 @@
+.timeline .month h3 {
+  border-top: 1px solid #888888;
+}
+
+.timeline .month:FIRST-CHILD h3 {
+  border-top-width: 0px;
+}
+
+.timeline .event {
+  margin-bottom: 10px;
+}
+
+.timeline .event .author {
+  color: #AAAAAA;
+}

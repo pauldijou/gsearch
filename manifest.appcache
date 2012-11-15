@@ -1,0 +1,55 @@
+CACHE MANIFEST
+
+# Time: Thu Nov 15 2012 21:10:51 GMT+0100 (CET)
+# This manifest was created by confess.js, http://github.com/jamesgpearce/confess
+#
+# Retrieved URL: http://localhost:3501/#!/
+# User-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.12 Safari/535.11
+#
+# Config:
+#  task: appcache
+#  userAgent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.12 Safari/535.11
+#  wait: 0
+#  consolePrefix: #
+#  verbose: true
+#  appcache:
+#   urlsFromDocument: true
+#   urlsFromRequests: false
+#   cacheFilter: .*
+#   networkFilter: null
+#  url: http://localhost:3501
+#  configFile: /usr/local/lib/node_modules/yeoman/lib/support/confess.json
+
+CACHE:
+components/angular-ui/build/angular-ui.js
+components/jquery/jquery.js
+components/modernizr/modernizr.js
+components/underscore/underscore.js
+http://localhost:3501/images/glyphicons-halflings-white.png
+http://localhost:3501/images/glyphicons-halflings.png
+http://localhost:3501/styles/select2.png
+http://localhost:3501/styles/spinner.gif
+scripts/22c9fa3a.app.js
+scripts/9eecb7db.scripts.js
+scripts/controllers/180389c3.app.js
+scripts/controllers/6532cd41.user.js
+scripts/controllers/add30322.repo.js
+scripts/controllers/e403d6f1.main.js
+scripts/directives/164c7f5b.tab.js
+scripts/directives/26ab62c3.tabs.js
+scripts/directives/9e6c1257.booleanIcon.js
+scripts/directives/bada12a0.buttonFav.js
+scripts/services/024e8e17.repo.js
+scripts/services/420737e0.searchRepos.js
+scripts/services/cbcd274e.user.js
+scripts/services/db3f3972.searchUsers.js
+scripts/vendor/angular/b291a314.angular-resource.js
+scripts/vendor/angular/d10639ae.angular.js
+scripts/vendor/blockui/ed8546e0.jquery.blockui.js
+scripts/vendor/bootstrap/9cad6353.bootstrap.js
+scripts/vendor/highcharts/dc920007.highcharts.js
+scripts/vendor/select2/fec56cc2.select2.js
+styles/503524fc.main.css
+
+NETWORK:
+*

@@ -1,0 +1,72 @@
+@media (max-width: 767px) {
+  /* Force table to not be like tables anymore */
+	table.table, .table thead, .table tbody, .table th, .table td, .table tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	.table thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	.table tr { border: 1px solid #ccc; }
+	
+	.table td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-top: 8px !important;
+		padding-left: 40%; 
+		width: auto !important;
+		text-align: left !important;
+		min-height: 20px;
+	}
+	
+	.table td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 35%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+	*/
+	table.main-repos td:nth-of-type(1):before { content: "Favorite:"; }
+	table.main-repos td:nth-of-type(2):before { content: "Owner:"; }
+	table.main-repos td:nth-of-type(3):before { content: "Name:"; }
+	table.main-repos td:nth-of-type(4):before { content: "Language:"; }
+	table.main-repos td:nth-of-type(5):before { content: "Fork?:"; }
+	table.main-repos td:nth-of-type(6):before { content: "Forks:"; }
+	table.main-repos td:nth-of-type(7):before { content: "Created:"; }
+	table.main-repos td:nth-of-type(8):before { content: "Last push:"; }
+	
+	table.main-users td:nth-of-type(1):before { content: "Favorite:"; }
+	table.main-users td:nth-of-type(2):before { content: "Username:"; }
+	table.main-users td:nth-of-type(3):before { content: "Name:"; }
+	table.main-users td:nth-of-type(4):before { content: "Location:"; }
+	table.main-users td:nth-of-type(5):before { content: "Language:"; }
+	table.main-users td:nth-of-type(6):before { content: "Repos:"; }
+	table.main-users td:nth-of-type(7):before { content: "Followers:"; }
+	table.main-users td:nth-of-type(8):before { content: "Joined:"; }
+	
+	table.user-repos td:nth-of-type(1):before { content: "Favorite:"; }
+	table.user-repos td:nth-of-type(2):before { content: "Name:"; }
+	table.user-repos td:nth-of-type(3):before { content: "Language:"; }
+	table.user-repos td:nth-of-type(4):before { content: "Fork?:"; }
+	table.user-repos td:nth-of-type(5):before { content: "Forks:"; }
+	table.user-repos td:nth-of-type(6):before { content: "Created:"; }
+	table.user-repos td:nth-of-type(7):before { content: "Last push:"; }
+	
+	table.repo-users td:nth-of-type(1):before { content: "Avatar:"; }
+	table.repo-users td:nth-of-type(2):before { content: "Login:"; }
+	table.repo-users td:nth-of-type(3):before { content: "Commits:"; }
+	table.repo-users td:nth-of-type(4):before { content: "Actions:"; }
+}

@@ -1,0 +1,77 @@
+@import "compass_twitter_bootstrap";
+
+@import "compass_twitter_bootstrap_responsive";
+
+@import "select2";
+
+@import "angular-ui";
+
+@import "timeline";
+
+@import "responsive_table";
+
+body {
+  padding-top: 60px;
+}
+
+@media (max-width: $navbarCollapseWidth) {
+  body {
+    padding-top: 0px;
+  }
+}
+
+footer {
+  padding-bottom: 20px;
+}
+
+form {
+  margin: 0px;
+}
+
+label {
+  display: block;
+  width: 100px;
+  text-align: right;
+  float: left;
+}
+
+label:AFTER {
+  content: ':'
+}
+
+label+div {
+  margin-left: 115px;
+  margin-bottom: 5px;
+  text-align: justify;
+}
+
+.navbar input {
+  margin-top: 6px;
+}
+
+tr.selectable {
+  cursor: pointer;
+}
+
+td.small-fav-button {
+  width: 34px;
+}
+
+.table td.icon {
+  text-align: center;
+}
+
+table.repo-users td {
+  padding-top: 35px;
+}
+
+table.repo-users td.avatar {
+  padding-top: 8px;
+  width: 96px;
+  text-align: center;
+}
+
+img.avatar {
+  width: 80px;
+  height: 80px;
+}
