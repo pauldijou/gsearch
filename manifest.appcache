@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# Time: Thu Nov 15 2012 21:10:51 GMT+0100 (CET)
+# Time: Thu Nov 15 2012 21:35:59 GMT+0100 (CET)
 # This manifest was created by confess.js, http://github.com/jamesgpearce/confess
 #
 # Retrieved URL: http://localhost:3501/#!/
@@ -31,10 +31,10 @@ http://localhost:3501/styles/select2.png
 http://localhost:3501/styles/spinner.gif
 scripts/22c9fa3a.app.js
 scripts/9eecb7db.scripts.js
-scripts/controllers/180389c3.app.js
 scripts/controllers/6532cd41.user.js
 scripts/controllers/add30322.repo.js
 scripts/controllers/e403d6f1.main.js
+scripts/controllers/f37d64fe.app.js
 scripts/directives/164c7f5b.tab.js
 scripts/directives/26ab62c3.tabs.js
 scripts/directives/9e6c1257.booleanIcon.js

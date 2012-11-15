@@ -35,19 +35,19 @@
           <span class="icon-bar"></span>
         </a>
         
-        <a class="brand" href="/#!/" data-ng-click="cleanResult()">GSearch</a>
+        <a class="brand" href="#!/" data-ng-click="cleanResult()">GSearch</a>
         
         <div class="nav-collapse collapse">
           <ul class="nav">
             <li>
-              <a href="/#!/">Search</a>
+              <a href="#!/">Search</a>
             </li>
             
             <li class="dropdown" data-ng-show="hasFavoriteRepos()">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Favorite repos <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li data-ng-repeat="repo in getFavoriteRepos()">
-                    <a href="/#!/repo/{{repo}}">{{repo}}</a>
+                    <a href="#!/repo/{{repo}}">{{repo}}</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -60,7 +60,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Favorite users <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li data-ng-repeat="user in getFavoriteUsers()">
-                  <a href="/#!/user/{{user}}">@{{user}}</a>
+                  <a href="#!/user/{{user}}">@{{user}}</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -88,7 +88,7 @@
   
   <div class="container">
     <div id="msg"></div>
-  
+    
     <div data-ng-view="view"></div>
   
     <hr/>
@@ -111,7 +111,7 @@
   <script src="scripts/22c9fa3a.app.js"></script>
   <script src="scripts/controllers/e403d6f1.main.js"></script>
   <script src="scripts/controllers/add30322.repo.js"></script>
-  <script src="scripts/controllers/180389c3.app.js"></script>
+  <script src="scripts/controllers/f37d64fe.app.js"></script>
   <script src="scripts/services/024e8e17.repo.js"></script>
   <script src="scripts/services/420737e0.searchRepos.js"></script>
   <script src="scripts/services/db3f3972.searchUsers.js"></script>
