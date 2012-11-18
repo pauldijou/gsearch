@@ -11,7 +11,7 @@
 <title>GSearch</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="styles/503524fc.main.css" />
+<link rel="stylesheet" href="styles/8def2993.main.css" />
 <script src="components/modernizr/modernizr.js"></script>
 </head>
 <body data-ng-app="gsearchApp" data-ng-controller="AppCtrl">
@@ -35,19 +35,19 @@
           <span class="icon-bar"></span>
         </a>
         
-        <a class="brand" href="#!/" data-ng-click="cleanResult()">GSearch</a>
+        <a class="brand" data-ng-href="#!/" data-ng-click="cleanResult()">GSearch</a>
         
         <div class="nav-collapse collapse">
           <ul class="nav">
             <li>
-              <a href="#!/">Search</a>
+              <a data-ng-href="#!/">Search</a>
             </li>
             
-            <li class="dropdown" data-ng-show="hasFavoriteRepos()">
+            <li class="dropdown ng-cloak" data-ng-show="hasFavoriteRepos()">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Favorite repos <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li data-ng-repeat="repo in getFavoriteRepos()">
-                    <a href="#!/repo/{{repo}}">{{repo}}</a>
+                    <a data-ng-href="#!/repo/{{repo}}">{{repo}}</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -56,11 +56,11 @@
               </ul>
             </li>
             
-            <li class="dropdown" data-ng-show="hasFavoriteUsers()">
+            <li class="dropdown ng-cloak" data-ng-show="hasFavoriteUsers()">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Favorite users <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li data-ng-repeat="user in getFavoriteUsers()">
-                  <a href="#!/user/{{user}}">@{{user}}</a>
+                  <a data-ng-href="#!/user/{{user}}">@{{user}}</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -94,7 +94,7 @@
     <hr/>
   
     <footer>
-      By Paul Dijou
+      By <a href="http://pauldijou.fr">Paul Dijou</a>
     </footer>
   </div>
   
@@ -106,8 +106,7 @@
   <script src="scripts/vendor/angular/b291a314.angular-resource.js"></script>
   <script src="components/angular-ui/build/angular-ui.js"></script>
   <script src="scripts/vendor/bootstrap/9cad6353.bootstrap.js"></script>
-  <script src="scripts/vendor/select2/fec56cc2.select2.js"></script>
   
-  <script src="scripts/08b9505f.scripts.js"></script>
+  <script src="scripts/c18c05ba.scripts.js"></script>
 </body>
 </html>

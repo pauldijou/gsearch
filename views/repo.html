@@ -4,7 +4,7 @@
   <a href="{{repo.html_url}}" class="btn btn-primary btn-large">View on GitHub</a>
 </h1>
 
-<tabs>
+<tabs type="pill">
   <tab title="Stats">
     <div class="row-fluid">
       <div class="span6">
@@ -33,7 +33,7 @@
           <li>
             <label>Owner</label>
             <div>
-              <a href="#!/user/{{repo.owner.login}}">{{repo.owner.login}}</a>
+              <a data-ng-href="#!/user/{{repo.owner.login}}">{{repo.owner.login}}</a>
             </div>
           </li>
           <li>
@@ -67,7 +67,7 @@
               <span>
                 <boolean-icon value="repo.fork"/>
               </span>
-              <a href="#!/repo/{{repo.parent.full_name}}" data-ng-show="repo.fork">(see parent)</a>
+              <a data-ng-href="#!/repo/{{repo.parent.full_name}}" data-ng-show="repo.fork">(see parent)</a>
             </div>
           </li>
           <li>
@@ -92,7 +92,7 @@
               <span>
                 <boolean-icon value="repo.has_wiki"/>
               </span>
-              <a href="{{repo.html_url}}/wiki" data-ng-show="repo.has_wiki">(see on GitHub)</a>
+              <a data-ng-href="{{repo.html_url}}/wiki" data-ng-show="repo.has_wiki">(see on GitHub)</a>
             </div>
           </li>
           <li>
@@ -101,7 +101,7 @@
               <span>
                 <boolean-icon value="repo.has_issues"/>
               </span>
-              <a href="{{repo.html_url}}/issues" data-ng-show="repo.has_issues">(see on GitHub)</a>
+              <a data-ng-href="{{repo.html_url}}/issues" data-ng-show="repo.has_issues">(see on GitHub)</a>
              </div>
           </li>
           <li>
@@ -110,7 +110,7 @@
               <span>
                 <boolean-icon value="repo.has_downloads"/>
               </span>
-              <a href="{{repo.html_url}}/downloads" data-ng-show="repo.has_downloads">(see on GitHub)</a>
+              <a data-ng-href="{{repo.html_url}}/downloads" data-ng-show="repo.has_downloads">(see on GitHub)</a>
             </div>
           </li>
         </ul>
@@ -150,7 +150,11 @@
             <h4>{{week.title}} ({{week.totalCommits}} commit{{plural(week.totalCommits)}})</h4>
             <ul>
               <li data-ng-repeat="event in week.events" class="event">
-                {{event.message}} (<a href="{{event.url}}">{{event.sha}}</a>)
+                {{event.message}} - 
+                <a data-ng-href="{{event.url}}">
+                  <span class="visible-desktop">{{event.sha}}</span>
+                  <span class="hidden-desktop">{{event.smallSha}}</span>
+                </a>
                 <br/>
                 <span class="author">{{event.authorName}} ({{event.authorEmail}}), {{event.date}}</span>
               </li>

@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# Time: Fri Nov 16 2012 17:40:59 GMT+0100 (CET)
+# Time: Sun Nov 18 2012 23:27:19 GMT+0100 (CET)
 # This manifest was created by confess.js, http://github.com/jamesgpearce/confess
 #
 # Retrieved URL: http://localhost:3501/#!/
@@ -29,14 +29,13 @@ http://localhost:3501/images/glyphicons-halflings-white.png
 http://localhost:3501/images/glyphicons-halflings.png
 http://localhost:3501/styles/select2.png
 http://localhost:3501/styles/spinner.gif
-scripts/08b9505f.scripts.js
+scripts/c18c05ba.scripts.js
 scripts/vendor/angular/b291a314.angular-resource.js
 scripts/vendor/angular/d10639ae.angular.js
 scripts/vendor/blockui/ed8546e0.jquery.blockui.js
 scripts/vendor/bootstrap/9cad6353.bootstrap.js
 scripts/vendor/highcharts/dc920007.highcharts.js
-scripts/vendor/select2/fec56cc2.select2.js
-styles/503524fc.main.css
+styles/8def2993.main.css
 
 NETWORK:
 *
