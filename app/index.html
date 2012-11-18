@@ -35,19 +35,19 @@
           <span class="icon-bar"></span>
         </a>
         
-        <a class="brand" href="/#!/" data-ng-click="cleanResult()">GSearch</a>
+        <a class="brand" data-ng-href="#!/" data-ng-click="cleanResult()">GSearch</a>
         
         <div class="nav-collapse collapse">
           <ul class="nav">
             <li>
-              <a href="/#!/">Search</a>
+              <a data-ng-href="#!/">Search</a>
             </li>
             
-            <li class="dropdown" data-ng-show="hasFavoriteRepos()">
+            <li class="dropdown ng-cloak" data-ng-show="hasFavoriteRepos()">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Favorite repos <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li data-ng-repeat="repo in getFavoriteRepos()">
-                    <a href="/#!/repo/{{repo}}">{{repo}}</a>
+                    <a data-ng-href="#!/repo/{{repo}}">{{repo}}</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -56,11 +56,11 @@
               </ul>
             </li>
             
-            <li class="dropdown" data-ng-show="hasFavoriteUsers()">
+            <li class="dropdown ng-cloak" data-ng-show="hasFavoriteUsers()">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Favorite users <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li data-ng-repeat="user in getFavoriteUsers()">
-                  <a href="/#!/user/{{user}}">@{{user}}</a>
+                  <a data-ng-href="#!/user/{{user}}">@{{user}}</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -88,13 +88,13 @@
   
   <div class="container">
     <div id="msg"></div>
-  
+    
     <div data-ng-view="view"></div>
   
     <hr/>
   
     <footer>
-      By Paul Dijou
+      By <a href="http://pauldijou.fr">Paul Dijou</a>
     </footer>
   </div>
   
@@ -106,8 +106,8 @@
   <script src="scripts/vendor/angular/angular-resource.js"></script>
   <script src="components/angular-ui/build/angular-ui.js"></script>
   <script src="scripts/vendor/bootstrap/bootstrap.js"></script>
-  <script src="scripts/vendor/select2/select2.js"></script>
   
+  <!-- build:js scripts/scripts.js -->
   <script src="scripts/app.js"></script>
   <script src="scripts/controllers/main.js"></script>
   <script src="scripts/controllers/repo.js"></script>
@@ -121,8 +121,7 @@
   <script src="scripts/directives/buttonFav.js"></script>
   <script src="scripts/directives/booleanIcon.js"></script>
   <script src="scripts/services/user.js"></script>
-  
-  <!-- build:js scripts/scripts.js -->
+  <script src="scripts/services/util.js"></script>
   <!-- endbuild -->
 </body>
 </html>

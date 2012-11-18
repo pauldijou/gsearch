@@ -1,6 +1,6 @@
 'use strict';
 
-gsearchApp.controller('UserCtrl', function($scope, $routeParams, user) {
+gsearchApp.controller('UserCtrl', ['$scope', '$routeParams', 'user', function($scope, $routeParams, user) {
     $scope.login = $routeParams.login;
     $scope.isUser = true;
 
@@ -18,4 +18,4 @@ gsearchApp.controller('UserCtrl', function($scope, $routeParams, user) {
     $scope.repos = user.repos({
         login : $scope.login
     });
-});
+}]);

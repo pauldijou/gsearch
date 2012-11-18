@@ -75,3 +75,13 @@ img.avatar {
   width: 80px;
   height: 80px;
 }
+
+@media (max-width: 767px) {
+  .hero-unit {
+    padding: 20px;
+    
+    h1 {
+      font-size: 30px;
+    }
+  }
+}

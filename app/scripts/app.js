@@ -24,10 +24,6 @@ var gsearchApp = angular.module('gsearchApp', ['ngResource', 'ui'])
 }]);
 
 gsearchApp.value('ui.config', {
-  select2: {
-     allowClear: true
-  },
-  
   jq: {
       tooltip: {
           placement: 'right'
@@ -40,45 +36,7 @@ gsearchApp.value('ui.config', {
   }
 });
 
-function addMessage(message, severity) {
-    var cssClasses = 'alert';
-    
-    if(severity) {
-        cssClasses += ' alert-'+severity;
-    }
-    
-    $("#msg").append('<div class="'+cssClasses+'"> <button type="button" class="close" data-dismiss="alert">×</button>'+message+'</div>');
-}
-
-function info(message) {
-    addMessage(message, 'info');
-}
-
-function success(message) {
-    addMessage(message, 'success');
-}
-
-function warn(message) {
-    addMessage(message, 'warning');
-}
-
-function error(message) {
-    addMessage(message, 'error');
-}
-
-function cleanMessages() {
-    $("#msg > div").remove();
-}
-
 $.blockUI.defaults.baseZ = 10000;
-
-function block() {
-    $.blockUI({ message: '<h1><img src="images/wait.gif" /> <span class="hidden-phone">Just a moment...</span></h1>' });
-}
-
-function unblock() {
-    $.unblockUI()
-}
 
 Date.prototype.toFirstDayWeek = function() {
     this.setDate(this.getDate() - this.getDay() + (this.getDay() == 0 ? -6:1));

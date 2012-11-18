@@ -1,60 +1,60 @@
 'use strict';
 
-gsearchApp.controller('AppCtrl', function($scope, $location, searchRepos, searchUsers) {
+gsearchApp.controller('AppCtrl', ['$scope', '$location', 'searchRepos', 'searchUsers', 'util', function($scope, $location, searchRepos, searchUsers, util) {
     $scope.search = "";
     $scope.isUserSearch = false;
-
     $scope.result = [];
-    
-    $scope.doSearch = function() {
-        $scope.result = [];
-    }
 
     $scope.doSearch = function() {
-        block();
-        if ($scope.search.indexOf("@") == 0) {
+        util.block();
+        if ($scope.isSearchForUser()) {
             var users = searchUsers.query({
                 keyword : $scope.search
             }, function() {
-                cleanMessages();
+                util.cleanMessages();
                 $scope.result = users.users;
                 $scope.isUserSearch = true;
-                $location.path('/#!/');
+                $location.path('/');
                 if (users.users.length == 0) {
-                    error('No respository found.');
+                    util.error('No respository found.');
                 }
-                unblock();
+                util.unblock();
             }, function() {
-                cleanMessages();
+                util.cleanMessages();
                 $scope.result = [];
-                $location.path('/#!/');
-                error('No respository found.');
-                unblock();
+                $location.path('/');
+                util.error('No respository found.');
+                util.unblock();
             });
         } else {
             var repos = searchRepos.query({
                 keyword : $scope.search
             }, function() {
-                cleanMessages();
+                util.cleanMessages();
                 $scope.result = repos.repositories;
                 $scope.isUserSearch = false;
-                $location.path('/#!/');
+                $location.path('/');
                 if (repos.repositories.length == 0) {
-                    error('No respository found.');
+                    util.error('No respository found.');
                 }
-                unblock();
+                util.unblock();
             }, function() {
-                cleanMessages();
+                util.cleanMessages();
                 $scope.result = [];
-                $location.path('/#!/');
-                error('No respository found.');
-                unblock();
+                $location.path('/');
+                util.error('No respository found.');
+                util.unblock();
             });
         }
     }
     
     $scope.cleanResult = function() {
         $scope.result = [];
+        $location.path('/');
+    }
+    
+    $scope.isSearchForUser = function() {
+        return ($scope.search.indexOf("@") == 0);
     }
     
     $scope.hasResult = function() {
@@ -162,4 +162,4 @@ gsearchApp.controller('AppCtrl', function($scope, $location, searchRepos, search
         $event.stopPropagation();
         $scope.setFavoriteUsers(_.without($scope.getFavoriteUsers(), login));
     }
-});
+}]);

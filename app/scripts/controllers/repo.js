@@ -1,6 +1,6 @@
 'use strict';
 
-gsearchApp.controller('RepoCtrl', function($scope, $routeParams, $filter, repo) {
+gsearchApp.controller('RepoCtrl', ['$scope', '$routeParams', '$filter', 'repo', function($scope, $routeParams, $filter, repo) {
     $scope.owner = $routeParams.owner;
     $scope.name = $routeParams.name;
     $scope.committers = [];
@@ -92,6 +92,7 @@ gsearchApp.controller('RepoCtrl', function($scope, $routeParams, $filter, repo) 
             
             // Push event to week
             event.sha = globalCommit.sha;
+            event.smallSha = globalCommit.sha.slice(0,6);
             event.authorName = commit.author.name;
             event.authorEmail = commit.author.email;
             event.url = commit.url.replace('https://api.github.com/repos', 'https://github.com').replace('/git/commits/', '/commit/').replace('/commits/', '/commit/');
@@ -140,7 +141,7 @@ gsearchApp.controller('RepoCtrl', function($scope, $routeParams, $filter, repo) 
                 text : 'Commits repartition'
             },
             tooltip : {
-                pointFormat : '{series.name}: <b>{point.percentage}%</b>',
+                pointFormat : '{series.name}: <b>{point.percentage}% ({point.y})</b>',
                 percentageDecimals : 2
             },
             plotOptions : {
@@ -152,7 +153,7 @@ gsearchApp.controller('RepoCtrl', function($scope, $routeParams, $filter, repo) 
                         color : '#000000',
                         connectorColor : '#000000',
                         formatter : function() {
-                            return '<b>' + this.point.name + '</b>: ' + Highcharts.numberFormat(this.percentage, 2) + '%';
+                            return '<b>' + this.point.name + '</b>: ' + Highcharts.numberFormat(this.percentage, 2)  + '% (' + this.point.y + ')';
                         }
                     }
                 }
@@ -168,7 +169,7 @@ gsearchApp.controller('RepoCtrl', function($scope, $routeParams, $filter, repo) 
     $scope.updateCommitsColumnChart = function() {
         var categories = [];
         var serieData = [];
-        _.each($scope.committers, function(committer) {
+        _.each($scope.committers, function(committer, index) {
             categories.push(committer.login);
             serieData.push(committer.numberOfCommits);
         });
@@ -199,6 +200,11 @@ gsearchApp.controller('RepoCtrl', function($scope, $routeParams, $filter, repo) 
                     text: 'Commits'
                 }
             },
+            plotOptions: {
+              column: {
+                  colorByPoint: true
+              }  
+            },
             legend: {
                 enabled: false
             },
@@ -208,16 +214,11 @@ gsearchApp.controller('RepoCtrl', function($scope, $routeParams, $filter, repo) 
                         'Commits: '+ this.y;
                 }
             },
-                series: [{
+            series: [{
                 name: 'Commits',
                 data: serieData,
                 dataLabels: {
                     enabled: true,
-                    rotation: -90,
-                    color: '#FFFFFF',
-                    align: 'right',
-                    x: -3,
-                    y: 10,
                     formatter: function() {
                         return this.y;
                     },
@@ -275,13 +276,21 @@ gsearchApp.controller('RepoCtrl', function($scope, $routeParams, $filter, repo) 
                 type: 'area'
             },
             title: {
-                text: 'Commits per week and per author'
+                text: 'Stacked commits per week and per author'
             },
             xAxis: {
                 categories: categories,
                 tickmarkPlacement: 'on',
                 title: {
                     enabled: false
+                },
+                labels: {
+                    rotation: -45,
+                    align: 'right',
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
                 }
             },
             yAxis: {
@@ -314,4 +323,4 @@ gsearchApp.controller('RepoCtrl', function($scope, $routeParams, $filter, repo) 
             series: series
         });
     }
-});
+}]);

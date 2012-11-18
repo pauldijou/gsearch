@@ -1,6 +1,6 @@
 'use strict';
 
-gsearchApp.factory('repo', function($resource) {
+gsearchApp.factory('repo', ['$resource', function($resource) {
     return $resource('https://api.github.com/repos/:owner/:name/:param1', {}, {
         'commits' : {
             method : 'GET',
@@ -8,4 +8,4 @@ gsearchApp.factory('repo', function($resource) {
             isArray : true
         }
     });
-});
+}]);

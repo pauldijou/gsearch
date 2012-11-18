@@ -1,6 +1,6 @@
 'use strict';
 
-gsearchApp.factory('user', function($resource) {
+gsearchApp.factory('user', ['$resource', function($resource) {
     return $resource('https://api.github.com/users/:login/:param1', {}, {
         'repos' : {
             method : 'GET',
@@ -8,4 +8,4 @@ gsearchApp.factory('user', function($resource) {
             isArray : true
         }
     });
-});
+}]);
