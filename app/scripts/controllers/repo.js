@@ -20,22 +20,22 @@ gsearchApp.controller('RepoCtrl', ['$scope', '$routeParams', '$filter', 'repo', 
         name : $scope.name
     }, function() {
         // Success
-        // Increment committers based on commits
-        _.each($scope.commits, function(commit) {
+        $scope.committers = _.reduce($scope.commits, function(committers, commit) {
             if (commit.author) {
-                var authors = _.where($scope.committers, {login: commit.author.login});
+                var authors = _.where(committers, {login: commit.author.login});
                 var author;
                 if(authors.length == 0) {
                     author = commit.author;
                     author.numberOfCommits = 0;
-                    $scope.committers.push(author);
+                    committers.push(author);
                 } else {
                     author = authors.pop();
                 }
                 
                 author.numberOfCommits++;
             }
-        });
+            return committers;
+        }, []);
         
         // Sort committers by numberOfCommits DESC
         $scope.committers = _.sortBy($scope.committers, function(committer) {
@@ -52,9 +52,7 @@ gsearchApp.controller('RepoCtrl', ['$scope', '$routeParams', '$filter', 'repo', 
     });
     
     $scope.fillTimeline = function() {
-        var timeline = [];
-        
-        _.each($scope.commits, function(globalCommit) {
+        var timeline = _.reduce($scope.commits, function(localTimeline, globalCommit) {
             var commit = globalCommit.commit;
             var dateCommit = new Date(commit.author.date);
             
@@ -71,11 +69,11 @@ gsearchApp.controller('RepoCtrl', ['$scope', '$routeParams', '$filter', 'repo', 
             weekTitle += $filter('date')(dateCommit, 'EEE dd/MM')
             
             // Get month if exists or init it
-            var month = _.where(timeline, {key: monthKey});
+            var month = _.where(localTimeline, {key: monthKey});
             
             if(month.length == 0) {
                 month = {key: monthKey, title: monthTitle, weeks: []};
-                timeline.push(month);
+                localTimeline.push(month);
             } else {
                 month = month.pop();
             }
@@ -99,7 +97,9 @@ gsearchApp.controller('RepoCtrl', ['$scope', '$routeParams', '$filter', 'repo', 
             event.message = commit.message;
             
             week.events.push(event);
-        });
+            
+            return localTimeline;
+        }, []);
         
         // Sort data
         _.each(timeline, function(month) {
@@ -124,10 +124,9 @@ gsearchApp.controller('RepoCtrl', ['$scope', '$routeParams', '$filter', 'repo', 
     }
 
     // Function to generate the pie chart
-    $scope.updateCommitsPieChart = function() {
-        var commitsData = [];
-        _.each($scope.committers, function(committer) {
-            commitsData.push([ committer.login, committer.numberOfCommits ]);
+    $scope.updateCommitsPieChart = function() {        
+        var commitsData = _.map($scope.committers, function(committer) {
+            return [ committer.login, committer.numberOfCommits ]
         });
         
         var chart = new Highcharts.Chart({
@@ -166,12 +165,13 @@ gsearchApp.controller('RepoCtrl', ['$scope', '$routeParams', '$filter', 'repo', 
         });
     }
     
-    $scope.updateCommitsColumnChart = function() {
-        var categories = [];
-        var serieData = [];
-        _.each($scope.committers, function(committer, index) {
-            categories.push(committer.login);
-            serieData.push(committer.numberOfCommits);
+    $scope.updateCommitsColumnChart = function() {        
+        var categories = _.map($scope.committers, function(committer) {
+            return committer.login
+        });
+        
+        var serieData = _.map($scope.committers, function(committer) {
+            return committer.numberOfCommits
         });
         
         var chart = new Highcharts.Chart({
@@ -238,16 +238,16 @@ gsearchApp.controller('RepoCtrl', ['$scope', '$routeParams', '$filter', 'repo', 
             return Highcharts.dateFormat('%d/%m/%Y', commitDate.getTime());
         });
         
-        var categories = [];
-        var series = [];
+        var categories = _.map(groupedByWeek, function(commits, date) {
+            return date;
+        });
         
-        _.each($scope.committers, function(committer) {
-            series.push({name: committer.login, data: [0]});
+        var series = _.map($scope.committers, function(committer) {
+            return {name: committer.login, data: [0]}
         });
         
         var index = 0;
         _.each(groupedByWeek, function(commits, date) {
-            categories.push(date);
             _.each(commits, function(commit) {
                 if(commit.author) {
                     var serie = _.where(series, {name: commit.author.login}).pop();
