@@ -19,9 +19,9 @@
   </thead>
   <tfoot></tfoot>
   <tbody>
-    <tr data-ng-repeat="repo in result" class="selectable" data-ng-click="showRepo(getRepoFullName(repo.owner, repo.name))">
+    <tr data-ng-repeat="repo in result" class="selectable" data-ng-click="$emit('showDetailRepo', repo.owner, repo.name)">
       <td class="small-fav-button">
-        <button-fav tooltip="{true: 'Remove from favorite', false: 'Add to favorite'}[isFavoriteRepo(getRepoFullName(repo.owner, repo.name))]" size="small" is-favorite="isFavoriteRepo(getRepoFullName(repo.owner, repo.name))" on-click="toggleFavoriteRepo(getRepoFullName(repo.owner, repo.name), $event)" />
+        <button-fav tooltip="getRepoFavTooltip(repo.owner, repo.name)" size="small" is-favorite="isFavoriteRepo(repo.owner, repo.name)" event-data="owner: '{{repo.owner}}', name: '{{repo.name}}'" />
       </td>
       <td>{{repo.owner}}</td>
       <td>{{repo.name}}</td>
@@ -49,9 +49,9 @@
   </thead>
   <tfoot></tfoot>
   <tbody>
-    <tr data-ng-repeat="user in result" class="selectable" data-ng-click="showUser(user.username)">
+    <tr data-ng-repeat="user in result" class="selectable" data-ng-click="$emit('showDetailUser', user.username)">
       <td class="small-fav-button">
-        <button-fav size="small" is-favorite="isFavoriteUser(user.username)" on-click="toggleFavoriteUser(user.username, $event)" />
+        <button-fav tooltip="getUserFavTooltip(user.username)" size="small" is-favorite="isFavoriteUser(user.username)" event-data="login: '{{user.username}}'" />
       </td>
       <td>{{user.username}}</td>
       <td>{{user.name}}</td>

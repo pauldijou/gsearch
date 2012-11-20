@@ -7,12 +7,17 @@ gsearchApp.directive('buttonFav', function() {
     replace : true,
     scope : {
         isFavorite: "=",
-        onClick: "&",
+        eventData: "@",
         label: "=",
         tooltip: "=",
         size: "@"
     },
-    template: '<button type="button" class="btn" data-ng-class="{\'btn-primary\': isFavorite, \'btn-small\': size == \'small\', \'btn-large\': size == \'large\'}" data-ng-click="onClick({$event: $event})" data-original-title="{{tooltip}}" data-ui-jq="tooltip">' +
+    controller : ['$scope', '$element', function($scope, $element) {
+        $scope.getEventData = function() {
+            return $scope.$eval('{' + $scope.eventData + '}');
+        }
+    }],
+    template: '<button type="button" class="btn" data-ng-class="{\'btn-primary\': isFavorite, \'btn-small\': size == \'small\', \'btn-large\': size == \'large\'}" data-ng-click="$emit(\'button-fav\', getEventData())" data-original-title="{{tooltip}}" data-ui-jq="tooltip">' +
         '<i class="icon-star" data-ng-class="{\'icon-white\': isFavorite}"></i> {{label}}' +
         '</button>'
   };

@@ -1,6 +1,6 @@
 <h1>
-  {{owner}} / {{name}} 
-  <button-fav size="large" label="{true: 'Favorite', false: 'Add to favorites'}[isFavoriteRepo(getRepoFullName(owner, name))]" is-favorite="isFavoriteRepo(getRepoFullName(owner, name))" on-click="toggleFavoriteRepo(getRepoFullName(owner, name), $event)"></button-fav>
+  {{fullName}} 
+  <button-fav size="large" label="getFavoriteLabel()" is-favorite="isFavoriteRepo(owner, name)" event-data="owner: '{{owner}}', name: '{{name}}'"></button-fav>
   <a href="{{repo.html_url}}" class="btn btn-primary btn-large">View on GitHub</a>
 </h1>
 
@@ -127,14 +127,14 @@
         <th>Actions</th>
       </thead>
       <tbody>
-      <tr data-ng-repeat="author in committers" class="selectable" data-ng-click="showUser(author.login)">
+      <tr data-ng-repeat="author in committers" class="selectable" data-ng-click="$emit('showDetailUser', author.login)">
         <td class="avatar">
           <img alt="avatar" data-ng-src="{{author.avatar_url}}" class="avatar">
         </td>
         <td>{{author.login}}</td>
         <td>{{author.numberOfCommits}}</td>
         <td>
-          <button-fav label="{true: 'Favorite', false: 'Add to favorites'}[isFavoriteUser(author.login)]" is-favorite="isFavoriteUser(author.login)" on-click="toggleFavoriteUser(author.login, $event)" />
+          <button-fav label="getFavoriteLabel(author.login)" is-favorite="isFavoriteUser(author.login)" event-data="login: '{{author.login}}'" />
         </td>
       </tr>
       </tbody>

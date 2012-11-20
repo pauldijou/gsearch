@@ -1,7 +1,7 @@
 <h1>
   <img alt="avatar" class="avatar" data-ng-src="{{user.avatar_url}}">
   @{{login}}
-  <button-fav size="large" label="{true: 'Favorite', false: 'Add to favorites'}[isFavoriteUser(login)]" is-favorite="isFavoriteUser(login)" on-click="toggleFavoriteUser(login, $event)"></button-fav>
+  <button-fav size="large" label="getFavoriteLabel()" is-favorite="isFavoriteUser(login)" event-data="login: '{{login}}'"></button-fav>
   <a href="{{user.html_url}}" class="btn btn-primary btn-large">View on GitHub</a>
 </h1>
 
@@ -89,9 +89,9 @@
   </thead>
   <tfoot></tfoot>
   <tbody>
-    <tr data-ng-repeat="repo in repos" class="selectable" data-ng-click="showRepo(repo.full_name)">
+    <tr data-ng-repeat="repo in repos" class="selectable" data-ng-click="$emit('showDetailRepo', repo.owner.login, repo.name)">
       <td class="small-fav-button">
-        <button-fav tooltip="{true: 'Remove from favorite', false: 'Add to favorite'}[isFavoriteRepo(repo.full_name)]" size="small" is-favorite="isFavoriteRepo(repo.full_name)" on-click="toggleFavoriteRepo(repo.full_name, $event)" />
+        <button-fav tooltip="getRepoFavTooltip(repo.owner.login, repo.name)" size="small" is-favorite="isFavoriteRepo(repo.owner.login, repo.name)" event-data="owner: '{{repo.owner.login}}', name: '{{repo.name}}'" />
       </td>
       <td>{{repo.name}}</td>
       <td>{{repo.language}}</td>

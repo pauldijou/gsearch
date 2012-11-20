@@ -1,10 +1,28 @@
 'use strict';
 
-gsearchApp.controller('RepoCtrl', ['$scope', '$routeParams', '$filter', 'repo', function($scope, $routeParams, $filter, repo) {
+gsearchApp.controller('RepoCtrl', ['$scope', '$routeParams', '$filter', 'repo', 'util', function($scope, $routeParams, $filter, repo, util) {
     $scope.owner = $routeParams.owner;
     $scope.name = $routeParams.name;
+    $scope.fullName = util.getRepoFullName($scope.owner, $scope.name);
     $scope.committers = [];
     $scope.timeline = [];
+    
+    $scope.getFavoriteLabel = function(login) {
+        if(login) {
+            if(util.isFavoriteUser(login)) {
+                return 'Favorite';
+            } else {
+                return 'Add to favorites';
+            }
+        }
+        else {
+            if(util.isFavoriteRepo($scope.fullName)) {
+                return 'Favorite';
+            } else {
+                return 'Add to favorites';
+            }
+        }
+    }
 
     // Request repo info from GitHub
     $scope.repo = repo.get({

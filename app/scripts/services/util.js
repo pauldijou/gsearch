@@ -38,6 +38,86 @@ gsearchApp.factory('util', function() {
 
       unblock: function() {
           $.unblockUI();
+      },
+      
+      getRepoFullName: function(owner, repoName) {
+          return owner + '/' + repoName;
+      },
+      
+      getFavoriteRepos: function() {
+          return angular.fromJson(localStorage.getItem('favoriteRepos')) || (new Array());
+      },
+
+      getFavoriteUsers: function() {
+          return angular.fromJson(localStorage.getItem('favoriteUsers')) || (new Array());
+      },
+
+      setFavoriteRepos: function(favoriteRepos) {
+          localStorage.setItem('favoriteRepos', angular.toJson(favoriteRepos));
+      },
+
+      setFavoriteUsers: function(favoriteUsers) {
+          localStorage.setItem('favoriteUsers', angular.toJson(favoriteUsers));
+      },
+
+      clearFavoriteRepos: function() {
+          localStorage.removeItem('favoriteRepos');
+      },
+
+      clearFavoriteUsers: function() {
+          localStorage.removeItem('favoriteUsers');
+      },
+
+      hasFavoriteRepos: function() {
+          return this.getFavoriteRepos().length > 0;
+      },
+
+      hasFavoriteUsers: function() {
+          return this.getFavoriteUsers().length > 0;
+      },
+
+      isFavoriteRepo: function(repoFullName) {
+          return _.indexOf(this.getFavoriteRepos(), repoFullName) > -1;
+      },
+
+      isFavoriteUser: function(login) {
+          return _.indexOf(this.getFavoriteUsers(), login) > -1;
+      },
+
+      toggleFavoriteRepo: function(repoFullName) {
+          if (this.isFavoriteRepo(repoFullName)) {
+              this.removeFavoriteRepo(repoFullName);
+          } else {
+              this.addFavoriteRepo(repoFullName);
+          }
+      },
+
+      toggleFavoriteUser: function(login) {
+          if (this.isFavoriteUser(login)) {
+              this.removeFavoriteUser(login);
+          } else {
+              this.addFavoriteUser(login);
+          }
+      },
+
+      addFavoriteRepo: function(repoFullName) {
+          var favoriteRepos = this.getFavoriteRepos();
+          favoriteRepos.push(repoFullName)
+          this.setFavoriteRepos(favoriteRepos);
+      },
+
+      addFavoriteUser: function(login) {
+          var favoriteUsers = this.getFavoriteUsers();
+          favoriteUsers.push(login)
+          this.setFavoriteUsers(favoriteUsers);
+      },
+
+      removeFavoriteRepo: function(repoFullName) {
+          this.setFavoriteRepos(_.without(this.getFavoriteRepos(), repoFullName));
+      },
+
+      removeFavoriteUser: function(login) {
+          this.setFavoriteUsers(_.without(this.getFavoriteUsers(), login));
       }
   }
 });
